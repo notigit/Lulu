@@ -27,6 +27,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
     implementation 'com.android.support:cardview-v7:26.1.0'
+
+    compile 'com.bigkoo:convenientbanner:2.0.5'
     //微信支付SDK
     compile files('libs/libammsdk.jar')
     //引入Picasso

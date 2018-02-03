@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/titleTv"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="我的"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="18sp" />
+    <VideoView
+        android:layout_width="match_parent"
+        android:background="@color/cardview_dark_background"
+        android:layout_height="1dp"/>
+    <com.example.lulu.view.ImageViewPlus
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/imageViewPlus"
+        android:layout_width="70dp"
+        android:layout_height="70dp"/>
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/accountTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="账号:qodjamd268"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/pwdTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="密码:123456"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
+</LinearLayout>
