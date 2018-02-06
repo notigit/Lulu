@@ -51,27 +51,22 @@ public class MainActivity extends AppCompatActivity implements TiYanView {
                     case R.id.tiYanRb:
 //                        titleTv.setText("体验区");
                         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, tiYanFragment).commit();
-                        Log.e("TAG", "onCheckedChanged: tiYanRb" );
                         break;
                     case R.id.vipRb:
 //                        titleTv.setText("会员区");
                         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new VipFragment()).commit();
-                        Log.e("TAG", "onCheckedChanged: vipRb" );
                         break;
                     case R.id.sortRb:
 //                        titleTv.setText("分类");
                         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new SortFragment()).commit();
-                        Log.e("TAG", "onCheckedChanged: sortRb" );
                         break;
                     case R.id.yiRenRb:
 //                        titleTv.setText("艺人");
                         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new YiRenFragment()).commit();
-                        Log.e("TAG", "onCheckedChanged: yiRenRb" );
                         break;
                     case R.id.myRb:
 //                        titleTv.setText("我的");
                         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new MyFragment()).commit();
-                        Log.e("TAG", "onCheckedChanged: myRb" );
                         break;
                 }
             }

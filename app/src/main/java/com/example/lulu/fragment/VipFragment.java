@@ -1,5 +1,6 @@
 package com.example.lulu.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.lulu.R;
+import com.example.lulu.activity.DetailActivity;
 import com.example.lulu.adapter.CommonAdapter;
 import com.example.lulu.adapter.SpaceItemDecoration;
 import com.example.lulu.adapter.ViewHolder;
@@ -43,6 +45,13 @@ public class VipFragment extends Fragment {
             @Override
             public void convert(ViewHolder holder, String s) {
                 holder.setText(R.id.describeTv,s);
+                holder.getConvertView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getActivity(), DetailActivity.class);
+                        startActivity(intent);
+                    }
+                });
             }
         };
         recyclerView.setAdapter(commonAdapter);

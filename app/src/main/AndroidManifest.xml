@@ -20,6 +20,12 @@
         </activity>
         <activity
             android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:name=".activity.DetailActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:theme="@style/Theme.AppCompat.NoActionBar"
             android:name=".activity.StartActivity"
             android:screenOrientation="portrait">
             <intent-filter>

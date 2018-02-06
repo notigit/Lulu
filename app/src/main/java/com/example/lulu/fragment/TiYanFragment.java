@@ -1,12 +1,14 @@
 package com.example.lulu.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +17,9 @@ import android.widget.ImageView;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
+import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.example.lulu.R;
+import com.example.lulu.activity.DetailActivity;
 import com.example.lulu.adapter.CommonAdapter;
 import com.example.lulu.adapter.SpaceItemDecoration;
 import com.example.lulu.adapter.ViewHolder;
@@ -52,6 +56,13 @@ public class TiYanFragment extends Fragment {
             @Override
             public void convert(ViewHolder holder, String s) {
                 holder.setText(R.id.describeTv,s);
+                holder.getConvertView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getActivity(), DetailActivity.class);
+                        startActivity(intent);
+                    }
+                });
             }
         };
         recyclerView.setAdapter(commonAdapter);
@@ -62,7 +73,7 @@ public class TiYanFragment extends Fragment {
         //开始自动翻页
         convenientBanner.startTurning(4000);
 //        convenientBanner.setPageTransformer(new AccordionTransformer());
-        List<String> imgList = new ArrayList<>();
+        final List<String> imgList = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             imgList.add("http://img.i.cacf.cn/avatar/1712/18/aa47952504a00c6ef0776f81240a1914.png!360360");
         }
@@ -72,6 +83,12 @@ public class TiYanFragment extends Fragment {
                 return new NetworkImageHolderView();
             }
         }, imgList).setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT);
+        convenientBanner.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Log.e("TAG", "onItemClick: "+imgList.get(position));
+            }
+        });
 
     }
     class NetworkImageHolderView implements Holder<String> {
