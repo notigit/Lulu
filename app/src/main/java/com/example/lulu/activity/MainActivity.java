@@ -5,11 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
+import com.example.lulu.Constant;
 import com.example.lulu.R;
 import com.example.lulu.fragment.MyFragment;
 import com.example.lulu.fragment.SortFragment;
@@ -17,13 +16,18 @@ import com.example.lulu.fragment.TiYanFragment;
 import com.example.lulu.fragment.VipFragment;
 import com.example.lulu.fragment.YiRenFragment;
 import com.example.lulu.mvp.model.TiYanModel;
-import com.example.lulu.mvp.presenter.TiYanPresenter;
-import com.example.lulu.mvp.view.TiYanView;
-import com.example.lulu.picasso.PicassoUtils;
-import com.example.lulu.view.ImageViewPlus;
+import com.example.lulu.okhttp.OneModel;
+import com.example.lulu.okhttp.OneModelCallBack;
+import com.example.lulu.okhttp.TiYanModelCallBack;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.Callback;
 
-public class MainActivity extends AppCompatActivity implements TiYanView {
-//    TextView titleTv;
+import java.io.IOException;
+
+public class MainActivity extends AppCompatActivity {
+    //    TextView titleTv;
     FrameLayout frameLayout;
     RadioGroup radioGroup;
     RadioButton tiYanRb, vipRb, sortRb, yiRenRb, myRb;
@@ -71,20 +75,41 @@ public class MainActivity extends AppCompatActivity implements TiYanView {
                 }
             }
         });
-        //网络
-        TiYanPresenter tiYanPresenter = new TiYanPresenter();
-        tiYanPresenter.attachView(this);
-        tiYanPresenter.getTiYan("6862", "DwJMdPwkbpBaGBlURqc1U1D1EklmmLxX");
+        OkHttpUtils
+                .get()
+                .url(Constant.API_BASE_URL+"message/message_consumer/user/")
+                .addParams("token", "DwJMdPwkbpBaGBlURqc1U1D1EklmmLxX")
+                .addParams("thread_id", "6862")
+                .build()
+                .execute(new TiYanModelCallBack() {
+                    @Override
+                    public void onError(Request request, Exception e) {
+                        Log.e("TAG", "onError: " );
+                    }
 
-    }
+                    @Override
+                    public void onResponse(TiYanModel response) {
+                        Log.e("TAG", "onResponse: "+response.getCode());
+                    }
+                });
 
-    @Override
-    public void showSuccess(TiYanModel model) {
-        Log.e("TAG", "showSuccess: ");
-    }
+        OkHttpUtils
+                .post()
+                .url(Constant.API_BASE_URL+"friend/group/create/")
+                .addParams("token", "DwJMdPwkbpBaGBlURqc1U1D1EklmmLxX")
+                .addParams("name", "6862")
+                .build()
+                .execute(new OneModelCallBack() {
+                    @Override
+                    public void onError(Request request, Exception e) {
+                        Log.e("TAG", "onError1: " );
+                    }
 
-    @Override
-    public void showFail(TiYanModel model) {
-        Log.e("TAG", "showFail: ");
+                    @Override
+                    public void onResponse(OneModel response) {
+                        Log.e("TAG", "onResponse1: "+response.getCode());
+                    }
+                });
+
     }
 }
