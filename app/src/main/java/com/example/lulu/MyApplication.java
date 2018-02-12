@@ -3,9 +3,6 @@ package com.example.lulu;
 import android.app.Activity;
 import android.app.Application;
 
-import com.tencent.mm.sdk.openapi.IWXAPI;
-import com.tencent.mm.sdk.openapi.WXAPIFactory;
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,19 +12,10 @@ import java.util.List;
 
 public class MyApplication extends Application {
     private static LinkedList<Activity> activityStack = new LinkedList<>();
-    private IWXAPI msgApi = null;
-
-    public IWXAPI getMsgApi() {
-        return msgApi;
-    }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        //初始化微信支付API
-        msgApi = WXAPIFactory.createWXAPI(getApplicationContext(), Constant.WEIXIN_APP_ID);
-        // 将该app注册到微信
-        msgApi.registerApp(Constant.WEIXIN_APP_ID);
     }
 
     public void addActivity(Activity aty) {

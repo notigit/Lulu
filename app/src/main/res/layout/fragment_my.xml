@@ -14,7 +14,7 @@
         android:textSize="18sp" />
     <VideoView
         android:layout_width="match_parent"
-        android:background="@color/cardview_dark_background"
+        android:background="@android:color/white"
         android:layout_height="1dp"/>
     <com.example.lulu.view.ImageViewPlus
         android:layout_gravity="center_horizontal"

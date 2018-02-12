@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -9,15 +8,45 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        flavorDimensions("lulu")
+    }
+    signingConfigs {
+        release {
+            storeFile file("D:\\example.jks")
+            storePassword "123456"
+            keyAlias "example"
+            keyPassword "123456"
+            v2SigningEnabled true
+        }
     }
     buildTypes {
         release {
+            minifyEnabled true
+            // Zipalign优化
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            //signingConfig signingConfigs.release
             minifyEnabled false
+            zipAlignEnabled false
+            // 移除无用的resource文件
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-}
+    productFlavors {
+        lulu{}
+        baidu{}
+    }
 
+    productFlavors.all {
+        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+    }
+}
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
@@ -26,27 +55,10 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
-    implementation 'com.android.support:cardview-v7:26.1.0'
     compile 'com.bigkoo:convenientbanner:2.0.5'
-
-    //微信支付SDK
-    compile files('libs/libammsdk.jar')
     //引入Picasso
     compile 'com.squareup.picasso:picasso:2.5.2'
 
-    //添加Retrofit依赖
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    //添加RX依赖
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0'
-    compile 'io.reactivex:rxandroid:1.1.0'
-    //添加相应json转换器 GSON/Moshi/Jackson/SimpleXML/ProtoBuf/Wire
-    compile 'com.squareup.retrofit2:converter-jackson:2.0.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.0.0'
-
-    compile 'com.squareup.okhttp3:okhttp:3.8.0'
-    compile 'com.squareup.okio:okio:1.9.0'
     compile "com.google.code.gson:gson:2.8.0"
-
-
     compile 'com.zhy:okhttputils:2.0.0'
 }
